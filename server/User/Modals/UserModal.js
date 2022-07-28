@@ -9,6 +9,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  confirmPassword: {
+    type: String,
+  },
 });
 
 const UserModal = mongoose.model("User", UserSchema);

@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
 
-const ContactsSchema = new mongoose.Schema({
-  user: {
-    type: String,
-  },
+const contactsInfo = new mongoose.Schema({
   name: {
     type: String,
   },
@@ -25,6 +22,14 @@ const ContactsSchema = new mongoose.Schema({
   country: {
     type: String,
   },
+});
+
+const ContactsSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  contacts: [contactsInfo],
 });
 
 const ContactsModal = mongoose.model("Contacts", ContactsSchema);
