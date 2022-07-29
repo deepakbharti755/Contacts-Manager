@@ -9,18 +9,32 @@ router.post("/", (req, res) => {
       if (user) {
         ContactModal.create({
           user: user[0]._id,
-          contacts: [
-            {
-              name: req.body.name,
-              designation: req.body.designation,
-              company: req.body.company,
-              industry: req.body.industry,
-              email: req.body.email,
-              phoneNumber: req.body.phoneNumber,
-              country: req.body.country,
-            },
-          ],
+          contacts: req.body.contacts,
         })
+          .then((data) => {
+            res.status(200).send(data);
+          })
+          .catch((err) => {
+            res.status(400).send(err);
+          });
+      } else {
+        res.status(400).send("user not found");
+      }
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
+
+router.delete("/selected", (req, res) => {
+  const remove = req.body.emailArray;
+  UserModal.find({ email: req.body.userdata.email })
+    .then((user) => {
+      if (user) {
+        ContactModal.updateMany(
+          { _id: user[0]._id },
+          { $pull: { contacts: { $in: [remove] } } }
+        )
           .then((contacts) => {
             res.status(200).send(contacts);
           })
@@ -36,24 +50,39 @@ router.post("/", (req, res) => {
     });
 });
 
-router.delete("/selected", (req, res) => {
-  ContactModal.find({ contacts: [{ email: req.body.email }] })
-    .then((contact) => {
-      if (contact) {
-        ContactModal.findByIdAndRemove(contact[0]._id)
-          .then(() => {
-            res.status(400).send("Contact is deleted");
+router.get("/", (req, res) => {
+  UserModal.find({ email: req.body.userdata.email })
+    .then((user) => {
+      if (user) {
+        ContactModal.aggregate([{ $match: { user: user[0]._id } }])
+          .then((contacts) => {
+            res.status(200).send(contacts);
           })
           .catch((err) => {
             res.status(400).send(err);
           });
       } else {
-        res.status(400).send("Contact is not found");
+        res.status(400).send("user not found");
       }
     })
     .catch((err) => {
       res.status(400).send(err);
     });
+});
+
+router.get("/search", (req, res) => {
+  const search = req.query.email;
+  if (search) {
+    ContactModal.aggregate([{ contacts: [{ email: { $regex: search } }] }])
+      .then((data) => {
+        res.status(200).send(data.contacts);
+      })
+      .catch((err) => {
+        res.status(400).send(err);
+      });
+  } else {
+    res.status(400).send("search is empty");
+  }
 });
 
 module.exports = router;

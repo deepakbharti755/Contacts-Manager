@@ -33,4 +33,5 @@ const ContactsSchema = new mongoose.Schema({
 });
 
 const ContactsModal = mongoose.model("Contacts", ContactsSchema);
+
 module.exports = ContactsModal;
