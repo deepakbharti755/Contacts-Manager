@@ -12,15 +12,15 @@ const cors = require("cors");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-// app.use((req, res, next) => {
-//   if (routes.includes(req.url)) {
-//     next();
-//   } else {
-//     const user = jwt.verify(req.headers.authorization, process.env.SECRET_KEY);
-//     req.body.userdata = user;
-//     next();
-//   }
-// });
+app.use((req, res, next) => {
+  if (routes.includes(req.url)) {
+    next();
+  } else {
+    const user = jwt.verify(req.headers.authorization, process.env.SECRET_KEY);
+    req.body.userdata = user;
+    next();
+  }
+});
 
 mongoose
   .connect(process.env.CONNECTION)

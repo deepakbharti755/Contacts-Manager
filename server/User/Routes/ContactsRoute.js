@@ -27,7 +27,7 @@ router.post("/", (req, res) => {
 });
 
 router.delete("/selected", (req, res) => {
-  const remove = req.body.emailArray;
+  const remove = req.query.emailArray;
   UserModal.find({ email: req.body.userdata.email })
     .then((user) => {
       if (user) {
