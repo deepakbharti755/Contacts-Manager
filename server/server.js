@@ -23,7 +23,9 @@ app.use((req, res, next) => {
 });
 
 mongoose
-  .connect(process.env.CONNECTION)
+  .connect(
+    "mongodb+srv://Akshith:akshith123@cluster0.klllr.mongodb.net/Contacts?retryWrites=true&w=majority"
+  )
   .then(() => {
     console.log(`Database is connected`);
   })

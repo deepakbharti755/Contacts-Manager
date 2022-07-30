@@ -1,0 +1,82 @@
+.main-container{
+    position: absolute;
+    width: fit-content;
+    height: 80vh;
+    left: 255px;
+    top: 110px;
+    background: #FBFBFB;
+}
+.header{
+    display: flex;
+    margin-top: 10px;
+}
+.button{
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 5px;
+}
+.button img{
+    margin-right: 5px;
+}
+.first{
+    margin:0 20px
+}
+.second{
+    margin-right: 600px;
+}
+.third{
+    margin-right: 20px;
+}
+.contacts{
+    display: flex;
+    align-items: center;
+}
+#checkbox{
+    margin: 0 10px 0 30px;
+}
+.Name{
+    display: flex;
+    width: 10%;
+}
+.Designation{
+    display: flex;
+    align-items: center;
+}
+.Company{
+    display: flex;
+    align-items: center;
+}
+.Industry{
+    display: flex;
+    align-items: center;
+}
+.Email{
+    display: flex;
+    align-items: center;
+    width: 18%;
+}
+.Phone{
+    display: flex;
+    align-items: center;
+    width: 15%;
+}
+.Country{
+    display: flex;
+    align-items: center;
+    width: 10%;
+}
+.Action{
+    display: flex;
+    align-items: center;
+    width: 10%;
+}
+.line{
+    margin-right: 5px;
+}
+.arrows{
+    margin-left: 25px;
+    margin-right: 5px;
+}
