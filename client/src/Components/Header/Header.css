@@ -1,0 +1,55 @@
+.container{
+   display: flex;
+   flex-direction: column;
+
+}
+.header{
+    background-color: #FFFFFF;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.total-contacts{
+    margin-left: 250px;
+}
+
+.header-container{
+    border-bottom: 1px solid black;
+
+    
+}
+
+input{  
+    background: url("../Header/image/Vector.png") left    no-repeat;
+    height:25px;
+    width: 350px;
+    padding-left:35px; 
+    align-items: center;
+    justify-content: center;
+     
+}
+.searchbar{
+    position: absolute;
+    left: 800px;
+}
+.user-details{
+    display: flex;
+   position: absolute;
+   left: 1350px;
+   
+}
+.userimg{
+    height: 50px;
+    width: 50px;
+    padding-right: 10px;
+    
+}
+.user-name{
+    display: flex;
+    flex-direction: column;
+    
+}
+#user-name{
+    font-size: larger;
+    font-weight: bold;
+}
