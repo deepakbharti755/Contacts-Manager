@@ -15,21 +15,7 @@ export default function Header() {
          </h2>
           <div className="searchbar">
           <input type="text" placeholder="Search by Email Id...." onChange={(e) => { setEmail(e.target.value) }}/>
-          
-            {/* {ContactsModal.filter((val) => {
-              if (searchEmail === "") {
-                  return val
-              } else if (val.email.toLowerCase().includes(searchEmail.toLowerCase())) {
-                  return val;
-              }
-          }).map((val, key) => {
-              return (
-                  <div className='data' key={key}>
-                      <p>{val.email}</p>
-                  </div>
-              )
-          })} */}
-          
+  
           </div>
           <div className="user-details">
            <img className="userimg" src={Userimg} alt="userimage"></img>
