@@ -16,7 +16,7 @@ export default function Header() {
           <div className="searchbar">
           <input type="text" placeholder="Search by Email Id...." onChange={(e) => { setEmail(e.target.value) }}/>
           
-            {ContactsModal.filter((val) => {
+            {/* {ContactsModal.filter((val) => {
               if (searchEmail === "") {
                   return val
               } else if (val.email.toLowerCase().includes(searchEmail.toLowerCase())) {
@@ -28,7 +28,7 @@ export default function Header() {
                       <p>{val.email}</p>
                   </div>
               )
-          })}
+          })} */}
           
           </div>
           <div className="user-details">
