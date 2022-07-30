@@ -126,9 +126,7 @@ const ContactList = () => {
             </div>
           );
         })}
-      {isImport.length > 0 && (
-        <ImportFile importfile={isImport} importfunct={importfunct} />
-      )}
+      {isImport.length > 0 && <ImportFile importfunct={importfunct} />}
     </div>
   );
 };

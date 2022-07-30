@@ -4,7 +4,7 @@ import { parse } from "papaparse";
 import importlogo from "../../Images/Group.png";
 import axios from "axios";
 
-const ImportFile = ({ importfile, importfunct }) => {
+const ImportFile = ({ importfunct }) => {
   const [contacts, setContacts] = useState([]);
   useEffect(() => {
     const postdata = async () => {
@@ -18,9 +18,12 @@ const ImportFile = ({ importfile, importfunct }) => {
     };
     postdata();
   }, []);
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
   return (
-    <>
-      {importfile === "import" && (
+    <div>
+      {contacts.length === 0 && (
         <div
           className="importfile"
           onDragOver={(e) => {
@@ -46,13 +49,13 @@ const ImportFile = ({ importfile, importfunct }) => {
         </div>
       )}
       {contacts.length > 0 && (
-        <div className="importcomplete">
+        <div className="importcomplete" onClick={refreshPage}>
           <img src={importlogo} alt="" />
           <span className="import_instr">Import Complete</span>
           <span className="upload">CSV File is Uploaded</span>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
