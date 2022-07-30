@@ -7,7 +7,7 @@ router.post("/", (req, res) => {
   UserModal.find({ email: req.body.userdata.email })
     .then((user) => {
       if (user) {
-        ContactModal.create({
+        ContactModal.updateMany({
           user: user[0]._id,
           contacts: req.body.contacts,
         })
@@ -27,20 +27,26 @@ router.post("/", (req, res) => {
 });
 
 router.delete("/selected", (req, res) => {
-  const remove = req.query.emailArray;
   UserModal.find({ email: req.body.userdata.email })
     .then((user) => {
       if (user) {
-        ContactModal.updateMany(
-          { _id: user[0]._id },
-          { $pull: { contacts: { $in: [remove] } } }
-        )
-          .then((contacts) => {
-            res.status(200).send(contacts);
-          })
-          .catch((err) => {
-            res.status(400).send(err);
-          });
+        ContactModal.find({ user: user[0]._id }).then((data) => {
+          ContactModal.updateMany(
+            { user: user[0]._id },
+            {
+              $pull: {
+                contacts: { email: { $in: Array.from(req.body.email) } },
+              },
+            }
+          )
+            .then((contact) => {
+              console.log(contact);
+              res.status(200).send("Deleted contacts");
+            })
+            .catch((err) => {
+              res.status(400).send(err);
+            });
+        });
       } else {
         res.status(400).send("user not found");
       }
@@ -56,7 +62,7 @@ router.get("/", (req, res) => {
       if (user) {
         ContactModal.aggregate([{ $match: { user: user[0]._id } }])
           .then((contacts) => {
-            res.status(200).send(contacts);
+            res.status(200).send(contacts[0].contacts);
           })
           .catch((err) => {
             res.status(400).send(err);
@@ -73,13 +79,29 @@ router.get("/", (req, res) => {
 router.get("/search", (req, res) => {
   const search = req.query.email;
   if (search) {
-    ContactModal.aggregate([{ contacts: [{ email: { $regex: search } }] }])
-      .then((data) => {
-        res.status(200).send(data.contacts);
-      })
-      .catch((err) => {
-        res.status(400).send(err);
-      });
+    UserModal.find({ email: req.body.userdata.email }).then((user) => {
+      if (user) {
+        ContactModal.aggregate([{ $match: { user: user[0]._id } }]).then(
+          (contacts) => {
+            const array = contacts[0].contacts;
+            const filtersearch = array.filter((ele) => {
+              if (ele.email.split("@")[0].includes(search)) {
+                return ele;
+              }
+            });
+            res.status(200).send(filtersearch);
+          }
+        );
+      }
+    });
+    // ContactModal.aggregate([{ contacts: [{ email: search }] }])
+    //   .then((data) => {
+    //     console.log(data);
+    //     res.status(200).send(data.contacts);
+    //   })
+    //   .catch((err) => {
+    //     res.status(400).send(err);
+    //   });
   } else {
     res.status(400).send("search is empty");
   }

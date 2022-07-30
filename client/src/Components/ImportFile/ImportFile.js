@@ -1,10 +1,23 @@
 import "./ImportFile.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { parse } from "papaparse";
 import importlogo from "../../Images/Group.png";
+import axios from "axios";
 
 const ImportFile = () => {
   const [contacts, setContacts] = useState([]);
+  useEffect(() => {
+    const postdata = async () => {
+      try {
+        await axios.post("http://localhost:3001/contacts", {
+          contacts: contacts,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    postdata();
+  }, []);
   return (
     <div
       className="importfile"
