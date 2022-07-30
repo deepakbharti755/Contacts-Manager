@@ -6,18 +6,18 @@ import axios from "axios";
 
 const ImportFile = ({ importfile, importfunct }) => {
   const [contacts, setContacts] = useState([]);
-  // useEffect(() => {
-  //   const postdata = async () => {
-  //     try {
-  //       await axios.post("http://localhost:3001/contacts", {
-  //         contacts: contacts,
-  //       });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   postdata();
-  // }, []);
+  useEffect(() => {
+    const postdata = async () => {
+      try {
+        await axios.post("http://localhost:3001/contacts", {
+          contacts: contacts,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    postdata();
+  }, []);
   return (
     <>
       {importfile === "import" && (

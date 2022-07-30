@@ -7,10 +7,10 @@ router.post("/", (req, res) => {
   UserModal.find({ email: req.body.userdata.email })
     .then((user) => {
       if (user) {
-        ContactModal.updateMany({
-          user: user[0]._id,
-          contacts: req.body.contacts,
-        })
+        ContactModal.updateOne(
+          { user: user[0]._id },
+          { $addToSet: { contacts: { $each: req.body.contacts } } }
+        )
           .then((data) => {
             res.status(200).send(data);
           })

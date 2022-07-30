@@ -6,6 +6,7 @@ dotenv.config();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { ExistingUser, generatepasswordhash } = require("../Utility");
+const ContactsModal = require("../Modals/ContactsModal");
 
 router.post("/login", (req, res) => {
   UserModal.find({ email: req.body.email }).then((userdata) => {
@@ -41,8 +42,9 @@ router.post("/signup", async (req, res) => {
             password: passwordHash,
           })
             .then((data) => {
-              console.log(data);
-              res.status(200).send(data);
+              ContactsModal.create({ user: data._id }).then(() => {
+                res.status(200).send("user is created");
+              });
             })
             .catch((err) => {
               res.status(400).send(err);
