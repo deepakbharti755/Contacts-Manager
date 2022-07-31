@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Userimg from "../Header/image/unsplash_WNoLnJo7tS8.jpg";
 // import ContactsModal from
 
-export default function Header({ isImport }) {
+export default function Header({ isImport, isDelete }) {
   // const [searchEmail, setEmail] = useState("")
   // useEffect(() => {
   let counter = 0;
@@ -25,21 +25,33 @@ export default function Header({ isImport }) {
   // }, []);
 
   return (
-    <div className="container">
+    <>
       <header className="header-container">
-        <div className={isImport.length > 0 ? "headerhome" : "header"}>
+        <div
+          className={
+            isImport.length > 0 || isDelete.length > 0 ? "headerhome" : "header"
+          }
+        >
           <h2 className="total-contacts">Total Contacts</h2>
           <div className="searchbar">
             <input
               type="text"
               placeholder="Search by Email Id...."
               onKeyUp={searchFunction}
-              className={isImport.length > 0 ? "headerhome" : undefined}
+              className={
+                isImport.length > 0 || isDelete.length > 0
+                  ? "headerhome"
+                  : "search"
+              }
             />
           </div>
           <div className="user-details">
             <img
-              className={isImport.length > 0 ? "headerhome" : "userimg"}
+              className={
+                isImport.length > 0 || isDelete.length > 0
+                  ? "headerhome"
+                  : "userimg"
+              }
               src={Userimg}
               alt="userimage"
             ></img>
@@ -50,7 +62,6 @@ export default function Header({ isImport }) {
           </div>
         </div>
       </header>
-      <hr />
-    </div>
+    </>
   );
 }

@@ -1,8 +1,4 @@
-.container{
-   display: flex;
-   flex-direction: column;
 
-}
 .headerhome{
     display: inline-flex;
     justify-content: center;
@@ -21,8 +17,6 @@
 
 .header-container{
     border-bottom: 1px solid black;
-
-    
 }
 
 .search{  
@@ -36,7 +30,9 @@
 }
 .searchbar{
     position: absolute;
+    width: 300px;
     left: 600px;
+    height: 30px;
 }
 .user-details{
     display: flex;

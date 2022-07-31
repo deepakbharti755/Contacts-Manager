@@ -3,28 +3,35 @@ import { useEffect, useRef, useState } from "react";
 import { parse } from "papaparse";
 import importlogo from "../../Images/Group.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ImportFile = ({ importfunct }) => {
   const authToken = localStorage.getItem("authorization");
   const [contacts, setContacts] = useState([]);
   const componentRef = useRef();
   useEffect(() => {
-    const postdata = async () => {
-      try {
-        await axios.post(
-          "http://localhost:3001/contacts",
-          {
-            contacts: contacts,
-          },
-          { headers: { authorization: authToken } }
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    postdata();
-  }, []);
+    axios({
+      url: "http://localhost:3001/contacts",
+      headers: {
+        authorization: authToken,
+      },
+      method: "POST",
+      data: {
+        contacts: contacts,
+      },
+    })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [contacts]);
   useEffect(() => {
+    const refreshPage = () => {
+      window.location.reload(false);
+      importfunct("");
+    };
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
     function handleClick(e) {
@@ -36,10 +43,6 @@ const ImportFile = ({ importfunct }) => {
       }
     }
   }, []);
-  const refreshPage = () => {
-    window.location.reload(false);
-    importfunct("");
-  };
   return (
     <div className="File">
       {contacts.length === 0 && (
