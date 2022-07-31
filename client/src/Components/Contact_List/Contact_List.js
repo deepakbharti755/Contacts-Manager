@@ -35,31 +35,56 @@ const ContactList = () => {
       });
   }, []);
   return (
-    <div className="home">
-      <Header />
-      <Sidebar />
-      <div className="main-container">
-        <div className="header">
-          <div className="button first">
+    <div
+      id={isImport.length > 0 ? "home" : undefined}
+      className="containerMain"
+    >
+      <Header isImport={isImport} />
+      <Sidebar isImport={isImport} />
+      <div
+        className={isImport.length > 0 ? "transContainer" : "main-container"}
+      >
+        <div className={isImport.length > 0 ? "homepage" : "header"}>
+          <div
+            className={
+              isImport.length > 0 ? "buttontrans first" : "button first"
+            }
+          >
             <img src={datelogo} alt="" />
             <span>Select Date</span>
             <img src={downarrow} alt="" />
           </div>
-          <div className="button second">
+          <div
+            className={
+              isImport.length > 0 ? "buttontrans second" : "button second"
+            }
+          >
             <img src={vectorlogo} alt="" />
             <span>Filters</span>
             <img src={linelogo} alt="" />
             <img src={downarrow} alt="" />
           </div>
-          <div className="button third">
+          <div
+            className={
+              isImport.length > 0 ? "buttontrans third" : "button third"
+            }
+          >
             <img src={deletelogo} alt="" />
             <span>Delete</span>
           </div>
-          <div className="button third">
+          <div
+            className={
+              isImport.length > 0 ? "buttontrans third" : "button third"
+            }
+          >
             <img src={importlogo} alt="" />
             <span onClick={() => setIsImport("import")}>Import</span>
           </div>
-          <div className="button third">
+          <div
+            className={
+              isImport.length > 0 ? "buttontrans third" : "button third"
+            }
+          >
             <img src={exportlogo} alt="" />
             <span>Export</span>
           </div>

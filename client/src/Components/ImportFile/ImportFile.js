@@ -38,6 +38,7 @@ const ImportFile = ({ importfunct }) => {
   }, []);
   const refreshPage = () => {
     window.location.reload(false);
+    importfunct("");
   };
   return (
     <div className="File">
@@ -61,7 +62,7 @@ const ImportFile = ({ importfunct }) => {
           <img src={importlogo} alt="" />
           <span className="instruction">Import File</span>
           <span className="drag">Drag & Drop a CSV File to Upload</span>
-          <button className="cancel" onClick={() => importfunct(null)}>
+          <button className="cancel" onClick={() => importfunct("")}>
             Cancel
           </button>
         </div>

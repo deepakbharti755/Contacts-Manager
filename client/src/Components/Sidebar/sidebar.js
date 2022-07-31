@@ -5,7 +5,7 @@ import TotalContacts from "../Sidebar/images/Vector (3).png";
 import LogoutIcon from "../Sidebar/images/Vector (4).png";
 import { useNavigate } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar({ isImport }) {
   const navigate = useNavigate();
   const handlelogout = () => {
     localStorage.setItem("authorization", "");
@@ -13,7 +13,7 @@ export default function Sidebar() {
   };
   return (
     <div className="container">
-      <div className="sidebar">
+      <div className={isImport.length > 0 ? "sidehome" : "sidebar"}>
         <p className="logo">Logo</p>
         <div>
           <span>
