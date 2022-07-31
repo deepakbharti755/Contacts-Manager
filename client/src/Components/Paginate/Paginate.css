@@ -9,8 +9,9 @@
     margin: 0 10px;
     cursor: pointer;
 }
-.pagination span{
+.pagination a{
     color: rgba(203, 203, 203, 1);
     margin: 0 2px;
     cursor: pointer;
+    text-decoration: none;
 }

@@ -13,9 +13,9 @@ const Paginate = ({ contactsPerPage, totalContacts, paginate }) => {
         <img src={leftarrow} alt="" />
         {pageNumbers.map((number) => {
           return (
-            <span onClick={() => paginate(number)} className="page-link">
+            <a onClick={() => paginate(number)} href="#!" className="page-link">
               {number}
-            </span>
+            </a>
           );
         })}
         <img src={rightarrow} alt="" />

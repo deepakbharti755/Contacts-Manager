@@ -6,16 +6,26 @@ import axios from "axios";
 
 const DeleteContacts = ({ contactdelete, deletefunct }) => {
   const authToken = localStorage.getItem("authorization");
-  const [deleteContacts, setDeleteContacts] = useState([]);
+  const [deleteContacts, setDeleteContacts] = useState(true);
   const componentRef = useRef();
-  useEffect(() => {
-    axios({
-      url: "http://localhost:3001/contacts/selected",
-      method: "DELETE",
-      headers: { authorization: authToken },
-      data: { email: contactdelete },
-    });
-  }, []);
+  const handleok = (e) => {
+    e.preventDefault();
+    if (contactdelete.length > 0) {
+      axios({
+        url: "http://localhost:3001/contacts/selected",
+        method: "DELETE",
+        headers: { authorization: authToken },
+        data: { email: contactdelete },
+      })
+        .then((data) => {
+          console.log(data);
+          setDeleteContacts(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
   useEffect(() => {
     const refreshPage = () => {
       window.location.reload(false);
@@ -34,7 +44,7 @@ const DeleteContacts = ({ contactdelete, deletefunct }) => {
   }, []);
   return (
     <div className="deletecontact">
-      {deleteContacts.length === 0 && (
+      {deleteContacts && (
         <div className="deletefile">
           <img src={deletelogo} alt="" />
           <span className="inst">Delete Contacts</span>
@@ -43,11 +53,13 @@ const DeleteContacts = ({ contactdelete, deletefunct }) => {
             <button className="deletebutton" onClick={() => deletefunct("")}>
               Cancel
             </button>
-            <button className="okbutton">Ok</button>
+            <button className="okbutton" onClick={(e) => handleok(e)}>
+              Ok
+            </button>
           </div>
         </div>
       )}
-      {deleteContacts.length > 0 && (
+      {!deleteContacts && (
         <div className="deletecomplete" ref={componentRef}>
           <img src={importlogo} alt="" />
           <span className="del">Deleted Contacts</span>
