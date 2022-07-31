@@ -3,8 +3,14 @@ import "./sidebar.css";
 import Dashboardicon from "../Sidebar/images/Vector (2).png";
 import TotalContacts from "../Sidebar/images/Vector (3).png";
 import LogoutIcon from "../Sidebar/images/Vector (4).png";
+import { useNavigate } from "react-router-dom";
 
-export default function sidebar() {
+export default function Sidebar() {
+  const navigate = useNavigate();
+  const handlelogout = () => {
+    localStorage.setItem("authorization", "");
+    navigate("/");
+  };
   return (
     <div className="container">
       <div className="sidebar">
@@ -27,8 +33,15 @@ export default function sidebar() {
           ></img>
           <p id="total-contacts">Total Contacts</p>
         </button>
-        <img className="logout-icon" src={LogoutIcon} alt="logot-icon"></img>
-        <p className="logout-option">Logout</p>
+        <img
+          className="logout-icon"
+          src={LogoutIcon}
+          alt="logot-icon"
+          onClick={handlelogout}
+        ></img>
+        <p className="logout-option" onClick={handlelogout}>
+          Logout
+        </p>
       </div>
     </div>
   );

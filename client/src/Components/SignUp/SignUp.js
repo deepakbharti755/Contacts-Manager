@@ -39,19 +39,19 @@ const Signup = () => {
             <p>Create New Account</p>
             <form className="finput">
               <input
-                type="text"
+                type="email"
                 className="userid"
                 placeholder="User ID"
                 onChange={(e) => setData({ ...data, email: e.target.value })}
               />
               <input
-                type="text"
+                type="password"
                 className="pass"
                 placeholder="Password"
                 onChange={(e) => setData({ ...data, password: e.target.value })}
               />
               <input
-                type="text"
+                type="password"
                 className="confirm"
                 placeholder="Confirm Password"
                 onChange={(e) =>

@@ -5,14 +5,19 @@ import importlogo from "../../Images/Group.png";
 import axios from "axios";
 
 const ImportFile = ({ importfunct }) => {
+  const authToken = localStorage.getItem("authorization");
   const [contacts, setContacts] = useState([]);
   const componentRef = useRef();
   useEffect(() => {
     const postdata = async () => {
       try {
-        await axios.post("http://localhost:3001/contacts", {
-          contacts: contacts,
-        });
+        await axios.post(
+          "http://localhost:3001/contacts",
+          {
+            contacts: contacts,
+          },
+          { headers: { authorization: authToken } }
+        );
       } catch (error) {
         console.log(error);
       }
@@ -35,7 +40,7 @@ const ImportFile = ({ importfunct }) => {
     window.location.reload(false);
   };
   return (
-    <div>
+    <div className="File">
       {contacts.length === 0 && (
         <div
           className="importfile"

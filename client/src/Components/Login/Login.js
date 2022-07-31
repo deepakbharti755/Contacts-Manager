@@ -42,14 +42,14 @@ const Login = () => {
           <p>Enter your credentials to access your account</p>
           <form className="forminput">
             <input
-              type="text"
+              type="email"
               className="userId"
               placeholder="User ID"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
-              type="text"
+              type="password"
               className="password"
               placeholder="Password"
               value={password}

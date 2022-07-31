@@ -1,3 +1,6 @@
+.File{
+    z-index: 999;
+}
 .importfile{
     display: flex;
     flex-direction: column;

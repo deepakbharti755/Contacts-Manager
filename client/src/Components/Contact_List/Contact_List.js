@@ -16,23 +16,26 @@ import Header from "../Header/Header";
 import Sidebar from "../Sidebar/sidebar";
 
 const ContactList = () => {
+  const authToken = localStorage.getItem("authorization");
   const [isImport, setIsImport] = useState("");
   const [contactList, setContactList] = useState([]);
   const importfunct = (val) => {
     setIsImport("");
   };
-  //   useEffect(() => {
-  //     axios
-  //       .get("http://localhost:3001/contacts")
-  //       .then((contacts) => {
-  //         setContactList(contacts.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/contacts", {
+        headers: { authorization: authToken },
+      })
+      .then((contacts) => {
+        setContactList(contacts.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
-    <>
+    <div className="home">
       <Header />
       <Sidebar />
       <div className="main-container">
@@ -133,7 +136,7 @@ const ContactList = () => {
           })}
         {isImport.length > 0 && <ImportFile importfunct={importfunct} />}
       </div>
-    </>
+    </div>
   );
 };
 

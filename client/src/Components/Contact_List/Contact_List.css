@@ -1,3 +1,6 @@
+.home{
+    z-index: 1;
+}
 .main-container{
     position: absolute;
     width: fit-content;

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ContactList from "./Components/Contact_List/Contact_List";
 import Login from "./Components/login/login";
 import Signup from "./Components/signup/signup";
+import Protected from "./Components/Protected_Route/Protected";
 
 function App() {
   return (
@@ -11,6 +12,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/contacts"
+            element={
+              <Protected>
+                <ContactList />
+              </Protected>
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>
