@@ -5,8 +5,8 @@
  }
 .sidebar{
     position: absolute;
-    width: 231px;
-    height: 750px;
+    width: 250px;
+    height: 810px;
     left: 0px;
     top: 0px;
     background: #CEF3FF;
@@ -15,7 +15,7 @@
     position: absolute;
 width: 83px;
 height: 61px;
-left: 50px;
+left: 80px;
 top: 0px;
 font-family: 'Titillium Web';
 font-style: normal;
@@ -26,7 +26,7 @@ color: #0884FF;
 }
 .dashboard-icon{
     position: absolute;
-    left: 12.5%;
+    left: 15.5%;
     right: 12.5%;
     top: 124px;
     bottom: 8.33%;
@@ -51,7 +51,7 @@ align-items: center;
 color: #181818;
 
 }
-.button{
+.contactButton{
     position: absolute;
 width: 183px;
 height: 60px;

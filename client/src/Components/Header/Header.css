@@ -19,7 +19,7 @@
     
 }
 
-input{  
+.search{  
     background: url("../Header/image/Vector.png") left    no-repeat;
     height:25px;
     width: 350px;
@@ -30,12 +30,12 @@ input{
 }
 .searchbar{
     position: absolute;
-    left: 800px;
+    left: 600px;
 }
 .user-details{
     display: flex;
    position: absolute;
-   left: 1350px;
+   left: 1150px;
    
 }
 .userimg{

@@ -13,6 +13,7 @@ import binlogo from "../../Images/bin.png";
 import axios from "axios";
 import ImportFile from "../ImportFile/ImportFile";
 import Header from "../Header/Header";
+import Sidebar from "../Sidebar/sidebar";
 
 const ContactList = () => {
   const [isImport, setIsImport] = useState("");
@@ -32,6 +33,8 @@ const ContactList = () => {
   //   }, []);
   return (
     <>
+      <Header />
+      <Sidebar />
       <div className="main-container">
         <div className="header">
           <div className="button first">
