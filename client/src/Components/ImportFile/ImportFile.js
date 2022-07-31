@@ -1,11 +1,12 @@
 import "./ImportFile.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { parse } from "papaparse";
 import importlogo from "../../Images/Group.png";
 import axios from "axios";
 
 const ImportFile = ({ importfunct }) => {
   const [contacts, setContacts] = useState([]);
+  const componentRef = useRef();
   useEffect(() => {
     const postdata = async () => {
       try {
@@ -17,6 +18,18 @@ const ImportFile = ({ importfunct }) => {
       }
     };
     postdata();
+  }, []);
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+    function handleClick(e) {
+      if (componentRef && componentRef.current) {
+        const ref = componentRef.current;
+        if (!ref.contains(e.target)) {
+          refreshPage();
+        }
+      }
+    }
   }, []);
   const refreshPage = () => {
     window.location.reload(false);
@@ -49,7 +62,7 @@ const ImportFile = ({ importfunct }) => {
         </div>
       )}
       {contacts.length > 0 && (
-        <div className="importcomplete" onClick={refreshPage}>
+        <div className="importcomplete" ref={componentRef}>
           <img src={importlogo} alt="" />
           <span className="import_instr">Import Complete</span>
           <span className="upload">CSV File is Uploaded</span>
