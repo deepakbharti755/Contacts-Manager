@@ -1,4 +1,4 @@
-import "./signup.css";
+import "./Signup.css";
 import ellipse1 from "../../Images/Ellipse31.png";
 import ellipse2 from "../../Images/Ellipse32.png";
 import group1 from "../../Images/Group100.png";

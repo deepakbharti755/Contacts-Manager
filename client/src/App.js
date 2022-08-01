@@ -1,8 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ContactList from "./Components/Contact_List/Contact_List";
-import Login from "./Components/login/login";
-import Signup from "./Components/signup/signup";
+import Login from "./Components/Login/Login";
+import Signup from "./Components/Signup/Signup";
 import Protected from "./Components/Protected_Route/Protected";
 import { useState } from "react";
 
