@@ -5,7 +5,7 @@
     align-items: center;
     background-color: transparent;
 }
-.header{
+.header{ 
     background-color: #FFFFFF;
     display: inline-flex;
     justify-content: center;
@@ -14,6 +14,7 @@
 .total-contacts{
     margin-left: 250px;
     font-family: 'Titillium Web';
+    width: 150px;
 }
 
 .header-container{

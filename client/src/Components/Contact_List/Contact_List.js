@@ -75,6 +75,7 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
         isImport={isImport}
         isDelete={isDelete}
         handlesearch={handlesearch}
+        contactList={contactList}
       />
       <Sidebar
         isImport={isImport}

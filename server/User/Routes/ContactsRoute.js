@@ -40,7 +40,6 @@ router.delete("/selected", (req, res) => {
             }
           )
             .then((contact) => {
-              console.log(contact);
               res.status(200).send("Deleted contacts");
             })
             .catch((err) => {

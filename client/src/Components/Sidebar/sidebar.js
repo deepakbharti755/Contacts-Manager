@@ -17,7 +17,7 @@ export default function Sidebar({ isImport, isDelete, handletotal }) {
     window.location.reload();
   };
   return (
-    <div className="container">
+    <div className="cont">
       <div
         className={
           isImport.length > 0 || isDelete.length > 0 ? "sidehome" : "sidebar"

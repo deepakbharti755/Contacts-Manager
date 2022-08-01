@@ -1,43 +1,56 @@
 import "./Header.css";
 import React, { useState } from "react";
 import Userimg from "../Header/image/unsplash_WNoLnJo7tS8.jpg";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Header({ isImport, isDelete, handlesearch }) {
+export default function Header({
+  isImport,
+  isDelete,
+  handlesearch,
+  contactList,
+}) {
   const [searchEmail, setSearchEmail] = useState([]);
-  const [query, setQuery] = useState("");
-  const authToken = localStorage.getItem("authorization");
-  const [email, setEmail] = useState("");
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
-  const getData = () => {
-    axios
-      .get(`http://localhost:3001/contacts/search?email=${query}`, {
-        headers: { authorization: authToken },
-      })
-      .then((data) => {
-        setSearchEmail(data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  // const getData = () => {
+  //   axios
+  //     .get(`http://localhost:3001/contacts/search?email=${query}`, {
+  //       headers: { authorization: authToken },
+  //     })
+  //     .then((data) => {
+  //       setSearchEmail(data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+  // const debounce = function (fn, d) {
+  //   let timer;
+  //   return function () {
+  //     let context = this,
+  //       args = arguments;
+  //     clearTimeout(timer);
+  //     timer = setTimeout(() => {
+  //       fn.apply(context, args);
+  //     }, d);
+  //   };
+  // };
+  // const searchFunction = debounce(getData, 300);
+  const handlecontactsearch = (e) => {
+    const searchWord = e.target.value;
+    const newFilter = contactList.filter((value) => {
+      console.log(value);
+      return value.email.toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === "") {
+      setSearchEmail([]);
+    } else {
+      setSearchEmail(newFilter);
+    }
   };
-  const debounce = function (fn, d) {
-    let timer;
-    return function () {
-      let context = this,
-        args = arguments;
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        fn.apply(context, args);
-      }, d);
-    };
-  };
-  const searchFunction = debounce(getData, 300);
 
   const handleEmail = ({ contact }) => {
-    setEmail(contact.email);
     handlesearch([contact]);
     setSuccess(true);
     navigate("/search");
@@ -56,8 +69,8 @@ export default function Header({ isImport, isDelete, handlesearch }) {
             <input
               type="text"
               placeholder="Search by Email Id...."
-              onKeyUp={searchFunction}
-              onChange={(e) => setQuery(e.target.value)}
+              // onKeyUp={searchFunction}
+              onChange={(e) => handlecontactsearch(e)}
               className={
                 isImport.length > 0 || isDelete.length > 0
                   ? "headerhome"
@@ -66,7 +79,7 @@ export default function Header({ isImport, isDelete, handlesearch }) {
             />
           </div>
           <div className={success ? "searchdisplay" : "searchedEmail"}>
-            {searchEmail &&
+            {searchEmail.length !== 0 &&
               searchEmail.map((contact) => {
                 return (
                   <span
