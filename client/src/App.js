@@ -11,7 +11,6 @@ function App() {
   const handlecontactsPresent = (val) => {
     setContactsPresent(val);
   };
-
   return (
     <BrowserRouter>
       <div className="App">

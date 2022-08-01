@@ -13,6 +13,7 @@ export default function Sidebar({ isImport, isDelete, handletotal }) {
   };
   const handletotalcont = (e) => {
     handletotal(false);
+    navigate("/contacts");
     window.location.reload();
   };
   return (

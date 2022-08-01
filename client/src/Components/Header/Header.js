@@ -1,5 +1,5 @@
 import "./Header.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Userimg from "../Header/image/unsplash_WNoLnJo7tS8.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -41,8 +41,6 @@ export default function Header({ isImport, isDelete, handlesearch }) {
     handlesearch([contact]);
     setSuccess(true);
     navigate("/search");
-    const input = document.getElementsByClassName("search");
-    input.placeholder = email;
   };
 
   return (
