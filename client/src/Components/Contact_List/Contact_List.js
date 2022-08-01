@@ -16,18 +16,21 @@ import Header from "../Header/Header";
 import Sidebar from "../Sidebar/sidebar";
 import DeleteContacts from "../DeleteContacts/DeleteContacts";
 import Paginate from "../Paginate/Paginate";
+import { useNavigate } from "react-router-dom";
 
-const ContactList = () => {
+const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
+  const navigate = useNavigate();
   const authToken = localStorage.getItem("authorization");
+  const [isSearch, setIsSearch] = useState(false);
   const [isImport, setIsImport] = useState("");
   const [isDelete, setIsDelete] = useState("");
-  const [contactdelete, setContactdelete] = useState([]);
   const [contactList, setContactList] = useState([]);
+  const [contactdelete, setContactdelete] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [contactsPerPage] = useState(8);
   const indexOfLastContact = currentPage * contactsPerPage;
   const indexOfFirstContact = indexOfLastContact - contactsPerPage;
-  const currentContacts = contactList.slice(
+  const currentContacts = contactsPresent.slice(
     indexOfFirstContact,
     indexOfLastContact
   );
@@ -38,6 +41,16 @@ const ContactList = () => {
   const deletefunct = (val) => {
     setIsDelete("");
   };
+  const handlesearch = (val) => {
+    setIsSearch(true);
+    handlecontactsPresent(val);
+  };
+  const handletotal = (val) => {
+    setIsSearch(val);
+    handlecontactsPresent(contactList);
+    navigate("/contacts");
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:3001/contacts", {
@@ -45,6 +58,9 @@ const ContactList = () => {
       })
       .then((contacts) => {
         setContactList(contacts.data);
+        if (!isSearch) {
+          handlecontactsPresent(contacts.data);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -55,8 +71,16 @@ const ContactList = () => {
       id={isImport.length > 0 || isDelete.length > 0 ? "home" : undefined}
       className="containerMain"
     >
-      <Header isImport={isImport} isDelete={isDelete} />
-      <Sidebar isImport={isImport} isDelete={isDelete} />
+      <Header
+        isImport={isImport}
+        isDelete={isDelete}
+        handlesearch={handlesearch}
+      />
+      <Sidebar
+        isImport={isImport}
+        isDelete={isDelete}
+        handletotal={handletotal}
+      />
       <div
         className={
           isImport.length > 0 || isDelete.length > 0
@@ -170,7 +194,7 @@ const ContactList = () => {
         </div>
         <div className="parentfield">
           {currentContacts &&
-            currentContacts.map((contact) => {
+            currentContacts.map((contact, index) => {
               return (
                 <div
                   className={
@@ -213,6 +237,9 @@ const ContactList = () => {
                       {contact.email.length > 20
                         ? contact.email.slice(0, 21) + "...."
                         : contact.email}
+                      {contact.email.length > 20 && (
+                        <span className="tooltip">{contact.email}</span>
+                      )}
                     </h4>
                   </div>
                   <div className="Phone">
@@ -239,7 +266,7 @@ const ContactList = () => {
       </div>
       <Paginate
         contactsPerPage={contactsPerPage}
-        totalContacts={contactList.length}
+        totalContacts={contactsPresent.length}
         paginate={paginate}
         currentPage={currentPage}
       />

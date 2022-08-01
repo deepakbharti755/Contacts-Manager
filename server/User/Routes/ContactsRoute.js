@@ -94,14 +94,6 @@ router.get("/search", (req, res) => {
         );
       }
     });
-    // ContactModal.aggregate([{ contacts: [{ email: search }] }])
-    //   .then((data) => {
-    //     console.log(data);
-    //     res.status(200).send(data.contacts);
-    //   })
-    //   .catch((err) => {
-    //     res.status(400).send(err);
-    //   });
   } else {
     res.status(400).send("search is empty");
   }

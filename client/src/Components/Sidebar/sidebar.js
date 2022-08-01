@@ -5,11 +5,15 @@ import TotalContacts from "../Sidebar/images/Vector (3).png";
 import LogoutIcon from "../Sidebar/images/Vector (4).png";
 import { useNavigate } from "react-router-dom";
 
-export default function Sidebar({ isImport, isDelete }) {
+export default function Sidebar({ isImport, isDelete, handletotal }) {
   const navigate = useNavigate();
   const handlelogout = () => {
     localStorage.setItem("authorization", "");
     navigate("/");
+  };
+  const handletotalcont = (e) => {
+    handletotal(false);
+    window.location.reload();
   };
   return (
     <div className="container">
@@ -29,7 +33,7 @@ export default function Sidebar({ isImport, isDelete }) {
           </span>
           <span className="dashboard">Dashboard</span>
         </div>
-        <button className="contactButton">
+        <button className="contactButton" onClick={(e) => handletotalcont(e)}>
           <img
             id="contacts-icon"
             src={TotalContacts}

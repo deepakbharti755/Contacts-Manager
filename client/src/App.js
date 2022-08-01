@@ -4,8 +4,14 @@ import ContactList from "./Components/Contact_List/Contact_List";
 import Login from "./Components/login/login";
 import Signup from "./Components/signup/signup";
 import Protected from "./Components/Protected_Route/Protected";
+import { useState } from "react";
 
 function App() {
+  const [contactsPresent, setContactsPresent] = useState([]);
+  const handlecontactsPresent = (val) => {
+    setContactsPresent(val);
+  };
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -16,7 +22,21 @@ function App() {
             path="/contacts"
             element={
               <Protected>
-                <ContactList />
+                <ContactList
+                  contactsPresent={contactsPresent}
+                  handlecontactsPresent={handlecontactsPresent}
+                />
+              </Protected>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <Protected>
+                <ContactList
+                  contactsPresent={contactsPresent}
+                  handlecontactsPresent={handlecontactsPresent}
+                />
               </Protected>
             }
           />

@@ -1,14 +1,27 @@
 import "./Header.css";
 import React, { useEffect, useState } from "react";
 import Userimg from "../Header/image/unsplash_WNoLnJo7tS8.jpg";
-// import ContactsModal from
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function Header({ isImport, isDelete }) {
-  // const [searchEmail, setEmail] = useState("")
-  // useEffect(() => {
-  let counter = 0;
+export default function Header({ isImport, isDelete, handlesearch }) {
+  const [searchEmail, setSearchEmail] = useState([]);
+  const [query, setQuery] = useState("");
+  const authToken = localStorage.getItem("authorization");
+  const [email, setEmail] = useState("");
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
   const getData = () => {
-    console.log("Fetching Data...", counter++);
+    axios
+      .get(`http://localhost:3001/contacts/search?email=${query}`, {
+        headers: { authorization: authToken },
+      })
+      .then((data) => {
+        setSearchEmail(data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const debounce = function (fn, d) {
     let timer;
@@ -22,7 +35,15 @@ export default function Header({ isImport, isDelete }) {
     };
   };
   const searchFunction = debounce(getData, 300);
-  // }, []);
+
+  const handleEmail = ({ contact }) => {
+    setEmail(contact.email);
+    handlesearch([contact]);
+    setSuccess(true);
+    navigate("/search");
+    const input = document.getElementsByClassName("search");
+    input.placeholder = email;
+  };
 
   return (
     <>
@@ -38,12 +59,26 @@ export default function Header({ isImport, isDelete }) {
               type="text"
               placeholder="Search by Email Id...."
               onKeyUp={searchFunction}
+              onChange={(e) => setQuery(e.target.value)}
               className={
                 isImport.length > 0 || isDelete.length > 0
                   ? "headerhome"
                   : "search"
               }
             />
+          </div>
+          <div className={success ? "searchdisplay" : "searchedEmail"}>
+            {searchEmail &&
+              searchEmail.map((contact) => {
+                return (
+                  <span
+                    className="search span"
+                    onClick={() => handleEmail({ contact })}
+                  >
+                    {contact.email}
+                  </span>
+                );
+              })}
           </div>
           <div className="user-details">
             <img
