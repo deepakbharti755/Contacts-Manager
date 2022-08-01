@@ -241,6 +241,7 @@ const ContactList = () => {
         contactsPerPage={contactsPerPage}
         totalContacts={contactList.length}
         paginate={paginate}
+        currentPage={currentPage}
       />
     </div>
   );
