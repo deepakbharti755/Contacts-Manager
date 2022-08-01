@@ -13,20 +13,24 @@
 }
 .total-contacts{
     margin-left: 250px;
+    font-family: 'Titillium Web';
 }
 
 .header-container{
-    border-bottom: 1px solid black;
+    font-family: 'Titillium Web';
+    margin-bottom: 10px;
 }
 
 .search{  
     background: url("../Header/image/Vector.png") left    no-repeat;
-    height:25px;
+    height:35px;
     width: 350px;
-    padding-left:35px; 
+    padding-left:50px; 
     align-items: center;
     justify-content: center;
-     
+    font-family: 'Titillium Web';
+    background-color: #F2F2F2;
+    border: none;
 }
 .searchbar{
     position: absolute;

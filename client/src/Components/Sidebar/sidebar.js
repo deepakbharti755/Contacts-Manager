@@ -33,7 +33,14 @@ export default function Sidebar({ isImport, isDelete, handletotal }) {
           </span>
           <span className="dashboard">Dashboard</span>
         </div>
-        <button className="contactButton" onClick={(e) => handletotalcont(e)}>
+        <button
+          className={
+            isImport.length > 0 || isDelete.length > 0
+              ? "buttontransparent"
+              : "contactButton"
+          }
+          onClick={(e) => handletotalcont(e)}
+        >
           <img
             id="contacts-icon"
             src={TotalContacts}

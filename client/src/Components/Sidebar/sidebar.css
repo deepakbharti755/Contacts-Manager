@@ -59,13 +59,23 @@ align-items: center;
 color: #181818;
 
 }
+.buttontransparent{
+    position: absolute;
+width: 183px;
+height: 60px;
+left: 24px;
+top: 190px;
+z-index: 1;
+background: transparent
+
+}
 .contactButton{
     position: absolute;
 width: 183px;
 height: 60px;
 left: 24px;
 top: 190px;
-
+z-index: 1;
 background: #2DA5FC;
 border-radius: 6px;
 }

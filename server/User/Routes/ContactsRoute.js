@@ -95,7 +95,17 @@ router.get("/search", (req, res) => {
       }
     });
   } else {
-    res.status(400).send("search is empty");
+    UserModal.find({}).then((user) => {
+      if (user) {
+        ContactModal.aggregate([{ $match: { user: user[0]._id } }])
+          .then((contacts) => {
+            res.status(200).send(contacts[0].contacts);
+          })
+          .catch((err) => {
+            res.status(400).send(err);
+          });
+      }
+    });
   }
 });
 
