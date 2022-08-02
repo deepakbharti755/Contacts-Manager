@@ -11,6 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [check, setCheck] = useState(true);
   const handlenavigate = (e) => {
     e.preventDefault();
     navigate("/signup");
@@ -27,6 +28,7 @@ const Login = () => {
         navigate("/contacts");
       })
       .catch((err) => {
+        setCheck(false);
         console.log(err);
       });
   };
@@ -62,6 +64,11 @@ const Login = () => {
               Sign Up
             </button>
           </form>
+          {!check && (
+            <div className="credentials">
+              <h4>Email and password doesn't match</h4>
+            </div>
+          )}
         </div>
       </div>
     </div>

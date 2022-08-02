@@ -50,7 +50,7 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
     handlecontactsPresent(contactList);
     navigate("/contacts");
   };
-
+  // console.log(contactdelete);
   useEffect(() => {
     axios
       .get("http://localhost:3001/contacts", {
@@ -156,7 +156,14 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
           }
         >
           <div className="contacts">
-            <input type="checkbox" id="checkbox" />
+            <input
+              type="checkbox"
+              id="checkbox"
+              onClick={() => {
+                const total = contactList.map((contact) => contact.email);
+                setContactdelete(total);
+              }}
+            />
             <div className="Name">
               <h3>Name</h3>
             </div>
@@ -251,7 +258,14 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
                   </div>
                   <div className="Action">
                     <img src={editlogo} alt="" />
-                    <img src={binlogo} alt="" />
+                    <img
+                      src={binlogo}
+                      alt=""
+                      onClick={() => {
+                        setContactdelete([contact.email]);
+                        setIsDelete("delete");
+                      }}
+                    />
                   </div>
                 </div>
               );

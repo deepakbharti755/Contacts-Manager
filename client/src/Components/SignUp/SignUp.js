@@ -10,6 +10,7 @@ import axios from "axios";
 const Signup = () => {
   const [data, setData] = useState({});
   const navigate = useNavigate();
+  const [validate, setValidate] = useState(true);
   const handlesubmit = (e) => {
     e.preventDefault();
     axios
@@ -23,6 +24,7 @@ const Signup = () => {
         navigate("/");
       })
       .catch((err) => {
+        setValidate(false);
         console.log(err);
       });
   };
@@ -43,6 +45,8 @@ const Signup = () => {
                 className="userid"
                 placeholder="User ID"
                 onChange={(e) => setData({ ...data, email: e.target.value })}
+                min={4}
+                max={8}
               />
               <input
                 type="password"
@@ -62,6 +66,11 @@ const Signup = () => {
                 Sign Up
               </button>
             </form>
+            {!validate && (
+              <div className="validate">
+                <h4>Passwords doesn't match</h4>
+              </div>
+            )}
           </div>
         </div>
       </div>
